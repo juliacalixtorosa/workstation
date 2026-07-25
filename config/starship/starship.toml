@@ -1,90 +1,157 @@
 # ==========================================================
 # Starship Prompt Configuration
-# Workstation Prompt v1
+# Workstation Prompt v2
+#
+# Professional dark theme with Powerline blocks
+# Designed for Software Engineering and DevOps workflow
+# ==========================================================
+
+
+# ==========================================================
+# Prompt Layout
 # ==========================================================
 
 format = """
+$username\
 $hostname\
 $directory\
 $git_branch\
 $git_status\
 $python\
 $nodejs\
+$c\
+$cmake\
 $docker_context\
-$terraform\
 $kubernetes\
+$terraform\
 $aws\
-$status
-[❯](bold green) """
+$line_break\
+$character"""
+
 
 # ==========================================================
-# Core
+# Identity
 # ==========================================================
+
+[username]
+show_always = true
+format = "[ $user ]($style)"
+style_user = "bold purple"
+style_root = "bold red"
+
 
 [hostname]
-disabled = false
-ssh_only = false
-format = "[$hostname](bold blue) "
+ssh_only = true
+format = "[@$hostname](bold purple) "
+
+
+# ==========================================================
+# Directory
+# ==========================================================
 
 [directory]
+format = "[ $path ]($style)"
+style = "bold white"
 truncation_length = 3
 truncate_to_repo = true
 read_only = " 🔒"
 
-[status]
-disabled = false
-success_symbol = ""
-symbol = "✗ "
-style = "bold red"
 
 # ==========================================================
 # Git
 # ==========================================================
 
 [git_branch]
+format = "[  $branch ]($style)"
 symbol = " "
+style = "bold blue"
+
 
 [git_status]
+format = "[$all_status$ahead_behind ]($style)"
+
+style = "bold yellow"
+
+conflicted = "="
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕"
-conflicted = "="
-deleted = "✘"
-modified = "!"
-renamed = "»"
+untracked = "?${count}"
+modified = "!${count}"
 staged = "+${count}"
-stashed = "*"
-untracked = "?"
-up_to_date = ""
+renamed = "»${count}"
+deleted = "✘${count}"
+stashed = "*${count}"
+
 
 # ==========================================================
 # Languages
 # ==========================================================
 
-[c]
-symbol = " "
-
-[cmake]
-symbol = "△ "
-
 [python]
+format = "[  $version ]($style)"
 symbol = " "
+style = "bold green"
+
 
 [nodejs]
+format = "[  $version ]($style)"
 symbol = " "
+style = "bold green"
+
+
+[c]
+format = "[  $version ]($style)"
+symbol = " "
+style = "bold cyan"
+
+
+[cmake]
+format = "[ △ $version ]($style)"
+symbol = "△ "
+style = "bold cyan"
+
 
 # ==========================================================
 # DevOps
 # ==========================================================
 
 [docker_context]
+format = "[  $context ]($style)"
 symbol = " "
+style = "bold blue"
 
-[terraform]
-symbol = " "
 
 [kubernetes]
+format = "[ ☸ $context ]($style)"
 symbol = "☸ "
+style = "bold cyan"
+
+
+[terraform]
+format = "[  $workspace ]($style)"
+symbol = " "
+style = "bold purple"
+
 
 [aws]
+format = "[  $profile ]($style)"
 symbol = " "
+style = "bold yellow"
+
+
+# ==========================================================
+# Prompt Character
+# ==========================================================
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+
+# ==========================================================
+# Line Break
+# ==========================================================
+
+[line_break]
+disabled = false
