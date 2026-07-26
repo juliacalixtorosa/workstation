@@ -1,0 +1,16 @@
+# Backup files
+.workstation-backups/
+
+# Editor
+.vscode/
+.idea/
+
+# Vim
+*.swp
+*~
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
