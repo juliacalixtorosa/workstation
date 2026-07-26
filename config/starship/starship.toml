@@ -1,33 +1,35 @@
 # ==========================================================
 # Starship Prompt Configuration
-# Workstation Prompt v2
+# Workstation Prompt v3
 #
-# Professional dark theme with Powerline blocks
-# Designed for Software Engineering and DevOps workflow
-# ==========================================================
-
-
-# ==========================================================
-# Prompt Layout
+# Theme:
+#   Tokyo Night × Pastel Powerline
+#
 # ==========================================================
 
 format = """
+[](fg:#a3aed2)\
 $username\
 $hostname\
+[](fg:#a3aed2 bg:#769ff0)\
 $directory\
+[](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
+[](fg:#394260 bg:#212736)\
 $python\
 $nodejs\
 $c\
 $cmake\
+[](fg:#212736 bg:#1d2230)\
 $docker_context\
 $kubernetes\
 $terraform\
 $aws\
+[](fg:#1d2230)\
 $line_break\
-$character"""
-
+$character
+"""
 
 # ==========================================================
 # Identity
@@ -35,123 +37,111 @@ $character"""
 
 [username]
 show_always = true
+style_user = "bg:#a3aed2 fg:#090c0c bold"
+style_root = "bg:#a3aed2 fg:#ff5555 bold"
 format = "[ $user ]($style)"
-style_user = "bold purple"
-style_root = "bold red"
-
 
 [hostname]
 ssh_only = true
-format = "[@$hostname](bold purple) "
-
+style = "bg:#a3aed2 fg:#090c0c bold"
+format = "[@$hostname ]($style)"
 
 # ==========================================================
 # Directory
 # ==========================================================
 
 [directory]
+style = "bg:#769ff0 fg:#e3e5e5"
 format = "[ $path ]($style)"
-style = "bold white"
-truncation_length = 3
 truncate_to_repo = true
-read_only = " 🔒"
+truncation_length = 3
+truncation_symbol = "…/"
 
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = "󰇚 "
+"Pictures" = "󰉏 "
+"Music" = "󱍙 "
 
 # ==========================================================
 # Git
 # ==========================================================
 
 [git_branch]
-format = "[  $branch ]($style)"
-symbol = " "
-style = "bold blue"
-
+symbol = "󰊢"
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
 [git_status]
-format = "[$all_status$ahead_behind ]($style)"
+style = "bg:#394260"
+format = "[$all_status$ahead_behind ](fg:#769ff0 bg:#394260)"
 
-style = "bold yellow"
-
-conflicted = "="
-ahead = "⇡${count}"
-behind = "⇣${count}"
-diverged = "⇕"
-untracked = "?${count}"
-modified = "!${count}"
-staged = "+${count}"
-renamed = "»${count}"
-deleted = "✘${count}"
-stashed = "*${count}"
-
+stashed = " ${count} "
+ahead = "󰞙 ${count} "
+behind = "󰞒 ${count} "
+diverged = "󰵉 ${ahead_count} ${behind_count} "
+conflicted = " ${count} "
+deleted = " ${count} "
+renamed = " ${count} "
+modified = " ${count} "
+staged = " ${count} "
+untracked = "󱅘 ${count}"
 
 # ==========================================================
 # Languages
 # ==========================================================
 
 [python]
-format = "[  $version ]($style)"
-symbol = " "
-style = "bold green"
-
+symbol = ""
+style = "bg:#212736"
+format = "[ $symbol ${pyenv_prefix}(${version}) ](fg:#769ff0 bg:#212736)"
 
 [nodejs]
-format = "[  $version ]($style)"
-symbol = " "
-style = "bold green"
-
+symbol = ""
+style = "bg:#212736"
+format = "[ $symbol (${version}) ](fg:#769ff0 bg:#212736)"
 
 [c]
-format = "[  $version ]($style)"
-symbol = " "
-style = "bold cyan"
-
+symbol = ""
+style = "bg:#212736"
+format = "[ $symbol (${version}) ](fg:#769ff0 bg:#212736)"
 
 [cmake]
-format = "[ △ $version ]($style)"
-symbol = "△ "
-style = "bold cyan"
-
+symbol = "△"
+style = "bg:#212736"
+format = "[ $symbol (${version}) ](fg:#769ff0 bg:#212736)"
 
 # ==========================================================
-# DevOps
+# Infrastructure
 # ==========================================================
 
 [docker_context]
-format = "[  $context ]($style)"
-symbol = " "
-style = "bold blue"
-
+symbol = ""
+style = "bg:#1d2230"
+format = "[ $symbol $context ](fg:#a0a9cb bg:#1d2230)"
 
 [kubernetes]
-format = "[ ☸ $context ]($style)"
-symbol = "☸ "
-style = "bold cyan"
-
+symbol = "☸"
+style = "bg:#1d2230"
+format = "[ $symbol $context ](fg:#a0a9cb bg:#1d2230)"
 
 [terraform]
-format = "[  $workspace ]($style)"
-symbol = " "
-style = "bold purple"
-
+symbol = ""
+style = "bg:#1d2230"
+format = "[ $symbol $workspace ](fg:#a0a9cb bg:#1d2230)"
 
 [aws]
-format = "[  $profile ]($style)"
-symbol = " "
-style = "bold yellow"
-
+symbol = ""
+style = "bg:#1d2230"
+format = "[ $symbol $profile ](fg:#a0a9cb bg:#1d2230)"
 
 # ==========================================================
-# Prompt Character
+# Prompt
 # ==========================================================
 
 [character]
-success_symbol = "[❯](bold green)"
+success_symbol = "[❯](bold #769ff0)"
 error_symbol = "[❯](bold red)"
-
-
-# ==========================================================
-# Line Break
-# ==========================================================
 
 [line_break]
 disabled = false
